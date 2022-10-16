@@ -19,6 +19,8 @@ class Board
   end
 
   def playable_slot(number)
+    return if column_full?(number)
+
     column = column(number)
     column.each_index do |index|
       return index if column[index + 1] != '  '

@@ -104,6 +104,11 @@ describe Board do
         expect(playable_board.playable_slot(2)).to eq(3)
       end
     end
+    context 'when column is full' do
+      it 'returns nil' do
+        expect(playable_board.playable_slot(4)).to be nil
+      end
+    end
   end
 
   describe '#update_slot' do
