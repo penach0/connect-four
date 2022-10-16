@@ -1,8 +1,11 @@
 class Board
   attr_reader :board
 
+  HEIGHT = 6
+  WIDTH = 7
+
   def initialize(board = nil)
-    @board = board || Array.new(6) { Array.new(7, '  ') }
+    @board = board || Array.new(HEIGHT) { Array.new(WIDTH, '  ') }
   end
 
   def column(number)
