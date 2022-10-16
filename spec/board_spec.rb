@@ -52,9 +52,34 @@ describe Board do
                            ['  ', '⚪', '  ', '  ', '  ', '  '],
                            ['  ', '⚫', '  ', '  ', '  ', '  ']])
     end
-    context 'when a given column is full' do
+    context 'when the given column is full' do
       it 'returns true' do
-        expect(column_board.column_full?(2)).to be true
+        expect(column_board).to be_column_full(2)
+      end
+    end
+    context 'when the given column is not full' do
+      it 'returns false' do
+        expect(column_board).not_to be_column_full(1)
+      end
+    end
+  end
+  describe 'board_full?' do
+    subject(:full_board) do
+      described_class.new([['⚪', '⚪', '⚫', '⚪', '⚪', '⚫'],
+                           ['⚪', '⚪', '⚫', '⚪', '⚪', '⚪'],
+                           ['⚪', '⚫', '⚫', '⚪', '⚫', '⚫'],
+                           ['⚫', '⚪', '⚪', '⚫', '⚪', '⚫'],
+                           ['⚪', '⚪', '⚫', '⚪', '⚪', '⚪'],
+                           ['⚪', '⚪', '⚫', '⚪', '⚪', '⚫']])
+    end
+    context 'when the board is full' do
+      it 'returns true' do
+        expect(full_board).to be_board_full
+      end
+    end
+    context 'when board is not full' do
+      it 'returns false' do
+        expect(board).not_to be_board_full
       end
     end
   end

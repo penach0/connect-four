@@ -13,4 +13,8 @@ class Board
   def column_full?(number)
     column(number).first != '  '
   end
+
+  def board_full?
+    board.first.none? { |slot| slot == '  ' }
+  end
 end
