@@ -63,7 +63,8 @@ describe Board do
       end
     end
   end
-  describe 'board_full?' do
+
+  describe '#board_full?' do
     subject(:full_board) do
       described_class.new([['⚪', '⚪', '⚫', '⚪', '⚪', '⚫'],
                            ['⚪', '⚪', '⚫', '⚪', '⚪', '⚪'],
@@ -80,6 +81,27 @@ describe Board do
     context 'when board is not full' do
       it 'returns false' do
         expect(board).not_to be_board_full
+      end
+    end
+  end
+
+  describe '#playable_slot' do
+    subject(:playable_board) do
+      described_class.new([['  ', '  ', '  ', '⚪', '  ', '  '],
+                           ['  ', '  ', '  ', '⚪', '  ', '  '],
+                           ['  ', '  ', '  ', '⚪', '  ', '  '],
+                           ['  ', '  ', '  ', '⚫', '  ', '  '],
+                           ['  ', '⚪', '  ', '⚫', '  ', '  '],
+                           ['  ', '⚫', '  ', '⚫', '  ', '  ']])
+    end
+    context 'when column is empty' do
+      it 'returns the bottom slot' do
+        expect(playable_board.playable_slot(1)).to eq(5)
+      end
+    end
+    context 'when column is played' do
+      it 'returns the lowest available slot' do
+        expect(playable_board.playable_slot(2)).to eq(3)
       end
     end
   end
