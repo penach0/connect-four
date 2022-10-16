@@ -9,4 +9,8 @@ class Board
     columns = board.transpose
     columns[number - 1]
   end
+
+  def column_full?(number)
+    column(number).first != '  '
+  end
 end

@@ -42,4 +42,20 @@ describe Board do
       end
     end
   end
+
+  describe '#column_full?' do
+    subject(:column_board) do
+      described_class.new([['  ', '⚪', '  ', '  ', '  ', '  '],
+                           ['  ', '⚫', '  ', '  ', '  ', '  '],
+                           ['  ', '⚪', '  ', '  ', '  ', '  '],
+                           ['  ', '⚫', '  ', '  ', '  ', '  '],
+                           ['  ', '⚪', '  ', '  ', '  ', '  '],
+                           ['  ', '⚫', '  ', '  ', '  ', '  ']])
+    end
+    context 'when a given column is full' do
+      it 'returns true' do
+        expect(column_board.column_full?(2)).to be true
+      end
+    end
+  end
 end
