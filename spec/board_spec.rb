@@ -105,4 +105,22 @@ describe Board do
       end
     end
   end
+
+  describe '#update_slot' do
+    context 'when given a column' do
+      it 'updates the value of the playable slot to ⚪' do
+        column = 1
+        piece = '⚪'
+        board.update_slot(column, piece)
+        expect(board.board[5][1]).to eq(piece)
+      end
+
+      it 'updates the value of the playable slot to ⚫' do
+        column = 2
+        piece = '⚫'
+        board.update_slot(column, piece)
+        expect(board.board[5][2]).to eq(piece)
+      end
+    end
+  end
 end

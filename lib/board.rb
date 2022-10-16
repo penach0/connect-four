@@ -24,4 +24,10 @@ class Board
       return index if column[index + 1] != '  '
     end
   end
+
+  def update_slot(number, piece)
+    column = number
+    row = playable_slot(number)
+    board[row][column] = piece
+  end
 end
