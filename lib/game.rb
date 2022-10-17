@@ -9,6 +9,11 @@ class Game
     @board = Board.new
   end
 
+  def setup
+    create_players(pick_color)
+    print_board
+  end
+
   def create_players(color)
     other_color = (color == '⚪' ? '⚫' : '⚪')
     if color == '⚪'
@@ -29,6 +34,18 @@ class Game
       print 'Please pick a valid option: '
     end
     answer == 'w' ? '⚪' : '⚫'
+  end
+
+  def pick_column(current_player)
+    print "#{current_player.piece} playing. Pick a number: "
+    loop do
+      column_number = gets.chomp.to_i
+
+      break current_player.make_play(board, column_number) if board.playable_slot(column_number)
+
+      print 'Not valid, pick another one: '
+    end
+
   end
 
   def print_board
