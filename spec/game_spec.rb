@@ -13,4 +13,24 @@ describe Game do
       game_players.create_players('⚪')
     end
   end
+
+  describe '#print_board' do
+    subject(:game_print) { described_class.new }
+    it 'prints the board on the screen' do
+      board = ['   ➊  ➋  ➌  ➍  ➎  ➏  ➐',
+               '  ┃  |  |  |  |  |  |  ┃',
+               '  ┃  |  |  |  |  |  |  ┃',
+               '  ┃  |  |  |  |  |  |  ┃',
+               '  ┃  |  |  |  |  |  |  ┃',
+               '  ┃  |  |  |  |  |  |  ┃',
+               '  ┃  |  |  |  |  |  |  ┃',
+               ' ╱╱‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾╲╲']
+
+      board.each do |line|
+        expect(game_print).to receive(:puts).with(line)
+      end
+
+      game_print.print_board
+    end
+  end
 end

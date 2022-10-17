@@ -1,7 +1,14 @@
+require_relative 'board'
 require_relative 'player'
 
 # Represents a single game of Connect 4
 class Game
+  attr_reader :board
+
+  def initialize
+    @board = Board.new
+  end
+
   def create_players(color)
     other_color = (color == '⚪' ? '⚫' : '⚪')
     if color == '⚪'
@@ -22,5 +29,16 @@ class Game
       print 'Please pick a valid option: '
     end
     answer == 'w' ? '⚪' : '⚫'
+  end
+
+  def print_board
+    top = '   ➊  ➋  ➌  ➍  ➎  ➏  ➐'
+    base = ' ╱╱‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾╲╲'
+
+    puts top
+    board.board.each do |row|
+      puts "  ┃#{row.join('|')}┃"
+    end
+    puts base
   end
 end
