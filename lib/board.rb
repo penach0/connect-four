@@ -1,15 +1,15 @@
 class Board
-  attr_reader :board
+  attr_reader :board, :columns
 
   HEIGHT = 6
   WIDTH = 7
 
   def initialize(board = nil)
     @board = board || Array.new(HEIGHT) { Array.new(WIDTH, '  ') }
+    @columns = @board.transpose
   end
 
   def column(number)
-    columns = board.transpose
     columns[number - 1]
   end
 
@@ -34,5 +34,23 @@ class Board
     column = number
     row = playable_slot(number)
     board[row][column] = piece
+  end
+
+  def horizontal_win?(piece)
+    count_pieces(piece, board)
+  end
+
+  def count_pieces(piece, direction)
+    count = 0
+
+    direction.each do |line|
+      next if line.count(piece) < 4
+
+      line.each do |slot|
+        slot == piece ? count += 1 : count = 0
+        return true if count == 4
+      end
+    end
+    false
   end
 end

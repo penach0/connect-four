@@ -128,4 +128,20 @@ describe Board do
       end
     end
   end
+
+  describe '#horizontal_win?' do
+    subject(:horizontal_board) do
+      described_class.new([['  ', '  ', '  ', '⚪', '  ', '  '],
+                           ['  ', '  ', '  ', '⚪', '  ', '  '],
+                           ['  ', '  ', '  ', '⚪', '  ', '  '],
+                           ['  ', '  ', '  ', '⚫', '  ', '  '],
+                           ['  ', '⚪', '⚫', '⚫', '⚫', '⚫'],
+                           ['  ', '⚫', '⚫', '⚪', '⚫', '⚪']])
+    end
+    context 'when there is an horizontal win on the board' do
+      it 'returns true' do
+        expect(horizontal_board.horizontal_win?('⚫')).to be true
+      end
+    end
+  end
 end
