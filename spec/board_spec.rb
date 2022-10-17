@@ -144,4 +144,20 @@ describe Board do
       end
     end
   end
+
+  describe '#vertical_win?' do
+    subject(:vertical_board) do
+      described_class.new([['  ', '  ', '  ', '⚪', '  ', '  '],
+                           ['  ', '  ', '  ', '⚪', '  ', '  '],
+                           ['  ', '  ', '  ', '⚪', '  ', '  '],
+                           ['  ', '  ', '  ', '⚪', '  ', '  '],
+                           ['  ', '⚪', '⚪', '⚫', '⚫', '⚫'],
+                           ['  ', '⚫', '⚫', '⚪', '⚫', '⚪']])
+    end
+    context 'when there is a vertical win on the board' do
+      it 'returns true' do
+        expect(vertical_board.vertical_win?('⚪')).to be true
+      end
+    end
+  end
 end

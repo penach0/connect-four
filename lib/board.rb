@@ -40,6 +40,10 @@ class Board
     count_pieces(piece, board)
   end
 
+  def vertical_win?(piece)
+    count_pieces(piece, columns)
+  end
+
   def count_pieces(piece, direction)
     count = 0
 
