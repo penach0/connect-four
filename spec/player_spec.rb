@@ -24,14 +24,45 @@ describe Player do
   end
 
   describe '#make_play' do
+    let(:board) { instance_double('Board') }
+    before(:each) { allow(board).to receive(:valid_play?).and_return(true) }
+
     context 'when given a number' do
-      subject(:board) { instance_double('Board') }
+      before do
+        allow(player).to receive(:gets).and_return('2')
+      end
 
       it 'sends message to update the respective slot' do
         piece = player.piece
-        column_number = 2
+        column_number = player.pick_column(board)
         expect(board).to receive(:update_slot).with(column_number, piece)
-        player.make_play(board, column_number)
+        player.make_play(board)
+      end
+    end
+
+    context 'when player is human' do
+      subject(:human_player) { described_class.new('⚫', 'human') }
+
+      before do
+        allow(board).to receive(:update_slot)
+      end
+
+      it 'sends message it calls pick#column' do
+        expect(human_player).to receive(:pick_column).with(board)
+        human_player.make_play(board)
+      end
+    end
+
+    context 'when player is computer' do
+      subject(:computer_player) { described_class.new('⚫', 'computer') }
+
+      before do
+        allow(board).to receive(:update_slot)
+      end
+
+      it 'sends message it calls pick#column' do
+        expect(computer_player).to receive(:random_column).with(board)
+        computer_player.make_play(board)
       end
     end
   end

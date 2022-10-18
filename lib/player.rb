@@ -6,8 +6,13 @@ class Player
     @type = type
   end
 
-  def make_play(board, column)
-    board.update_slot(column, piece)
+  def make_play(board)
+    case @type
+    when 'human'
+      board.update_slot(pick_column(board), piece)
+    when 'computer'
+      board.update_slot(random_column(board), piece)
+    end
   end
 
   # Human play
