@@ -60,23 +60,29 @@ class Board
     false
   end
 
-  def diagonal_left(x, y)
+  def diagonal_left(row, col)
     diagonal = []
-    while board[x] && board[x][y]
-      diagonal << board[x][y]
-      x += 1
-      y += 1
+    while valid_position?(row, col)
+      diagonal << board[row][col]
+      row += 1
+      col += 1
     end
     diagonal
   end
 
-  def diagonal_right(x, y)
+  def diagonal_right(row, col)
     diagonal = []
-    while board[x] && board[x][y]
-      diagonal << board[x][y]
-      x += 1
-      y -= 1
+    while valid_position?(row, col)
+      diagonal << board[row][col]
+      row += 1
+      col -= 1
     end
     diagonal
+  end
+
+  private
+
+  def valid_position?(row, col)
+    row.between?(0, HEIGHT - 1) && col.between?(0, WIDTH - 1)
   end
 end

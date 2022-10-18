@@ -222,7 +222,7 @@ describe Board do
                            ['  ', '⚪', '⚫', '⚫', '⚫', '⚫', '  '],
                            ['  ', '⚫', '⚫', '⚪', '⚫', '⚪', '  ']])
     end
-    context 'when given coordinates [6,0]' do
+    context 'when given coordinates [0,6]' do
       it 'returns the correct diagonal' do
         diagonal = ['  ', '  ', '  ', '⚫', '⚫', '⚫']
         expect(diagonal_board.diagonal_right(0, 6)).to eq(diagonal)
