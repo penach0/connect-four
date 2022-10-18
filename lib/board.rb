@@ -21,9 +21,11 @@ class Board
     board.first.none? { |slot| slot == '  ' }
   end
 
-  def playable_slot(number)
-    return if column_full?(number)
+  def valid_play?(number)
+    number.between?(1, 7) && !column_full?(number)
+  end
 
+  def playable_slot(number)
     column = column(number)
     column.each_index do |index|
       return index if column[index + 1] != '  '

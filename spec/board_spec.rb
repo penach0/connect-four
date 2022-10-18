@@ -85,6 +85,34 @@ describe Board do
     end
   end
 
+  describe '#valid_play?' do
+    subject(:valid_board) do
+      described_class.new([['  ', '  ', '  ', '⚪', '  ', '  '],
+                           ['  ', '  ', '  ', '⚪', '  ', '  '],
+                           ['  ', '  ', '  ', '⚪', '  ', '  '],
+                           ['  ', '  ', '  ', '⚫', '  ', '  '],
+                           ['  ', '⚪', '  ', '⚫', '  ', '  '],
+                           ['  ', '⚫', '  ', '⚫', '  ', '  ']])
+    end
+    context 'when column is full' do
+      it 'returns false' do
+        expect(valid_board).not_to be_valid_play(4)
+      end
+    end
+
+    context 'when the number is outside of range' do
+      it 'returns false' do
+        expect(valid_board).not_to be_valid_play(9)
+      end
+    end
+
+    context 'when the the play is valid' do
+      it 'returns true' do
+        expect(valid_board).to be_valid_play(1)
+      end
+    end
+  end
+
   describe '#playable_slot' do
     subject(:playable_board) do
       described_class.new([['  ', '  ', '  ', '⚪', '  ', '  '],
@@ -102,11 +130,6 @@ describe Board do
     context 'when column is played' do
       it 'returns the lowest available slot' do
         expect(playable_board.playable_slot(2)).to eq(3)
-      end
-    end
-    context 'when column is full' do
-      it 'returns nil' do
-        expect(playable_board.playable_slot(4)).to be nil
       end
     end
   end
