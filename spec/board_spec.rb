@@ -28,12 +28,12 @@ describe Board do
     end
     context 'when a column has pieces' do
       subject(:played_board) do
-        described_class.new([['  ', '  ', '  ', '  ', '  ', '  '],
-                             ['  ', '  ', '  ', '  ', '  ', '  '],
-                             ['  ', '  ', '  ', '  ', '  ', '  '],
-                             ['  ', '  ', '  ', '  ', '  ', '  '],
-                             ['  ', '⚪', '  ', '  ', '  ', '  '],
-                             ['  ', '⚫', '  ', '  ', '  ', '  ']])
+        described_class.new([['  ', '  ', '  ', '  ', '  ', '  ', '  '],
+                             ['  ', '  ', '  ', '  ', '  ', '  ', '  '],
+                             ['  ', '  ', '  ', '  ', '  ', '  ', '  '],
+                             ['  ', '  ', '  ', '  ', '  ', '  ', '  '],
+                             ['  ', '⚪', '  ', '  ', '  ', '  ', '  '],
+                             ['  ', '⚫', '  ', '  ', '  ', '  ', '  ']])
       end
 
       it 'returns the column' do
@@ -45,12 +45,12 @@ describe Board do
 
   describe '#column_full?' do
     subject(:column_board) do
-      described_class.new([['  ', '⚪', '  ', '  ', '  ', '  '],
-                           ['  ', '⚫', '  ', '  ', '  ', '  '],
-                           ['  ', '⚪', '  ', '  ', '  ', '  '],
-                           ['  ', '⚫', '  ', '  ', '  ', '  '],
-                           ['  ', '⚪', '  ', '  ', '  ', '  '],
-                           ['  ', '⚫', '  ', '  ', '  ', '  ']])
+      described_class.new([['  ', '⚪', '  ', '  ', '  ', '  ', '  '],
+                           ['  ', '⚫', '  ', '  ', '  ', '  ', '  '],
+                           ['  ', '⚪', '  ', '  ', '  ', '  ', '  '],
+                           ['  ', '⚫', '  ', '  ', '  ', '  ', '  '],
+                           ['  ', '⚪', '  ', '  ', '  ', '  ', '  '],
+                           ['  ', '⚫', '  ', '  ', '  ', '  ', '  ']])
     end
     context 'when the given column is full' do
       it 'returns true' do
@@ -66,12 +66,12 @@ describe Board do
 
   describe '#board_full?' do
     subject(:full_board) do
-      described_class.new([['⚪', '⚪', '⚫', '⚪', '⚪', '⚫'],
-                           ['⚪', '⚪', '⚫', '⚪', '⚪', '⚪'],
-                           ['⚪', '⚫', '⚫', '⚪', '⚫', '⚫'],
-                           ['⚫', '⚪', '⚪', '⚫', '⚪', '⚫'],
-                           ['⚪', '⚪', '⚫', '⚪', '⚪', '⚪'],
-                           ['⚪', '⚪', '⚫', '⚪', '⚪', '⚫']])
+      described_class.new([['⚪', '⚪', '⚫', '⚪', '⚪', '⚫', '⚫'],
+                           ['⚪', '⚪', '⚫', '⚪', '⚪', '⚪', '⚪'],
+                           ['⚪', '⚫', '⚫', '⚪', '⚫', '⚫', '⚫'],
+                           ['⚫', '⚪', '⚪', '⚫', '⚪', '⚫', '⚪'],
+                           ['⚪', '⚪', '⚫', '⚪', '⚪', '⚪', '⚫'],
+                           ['⚪', '⚪', '⚫', '⚪', '⚪', '⚫', '⚪']])
     end
     context 'when the board is full' do
       it 'returns true' do
@@ -87,12 +87,12 @@ describe Board do
 
   describe '#valid_play?' do
     subject(:valid_board) do
-      described_class.new([['  ', '  ', '  ', '⚪', '  ', '  '],
-                           ['  ', '  ', '  ', '⚪', '  ', '  '],
-                           ['  ', '  ', '  ', '⚪', '  ', '  '],
-                           ['  ', '  ', '  ', '⚫', '  ', '  '],
-                           ['  ', '⚪', '  ', '⚫', '  ', '  '],
-                           ['  ', '⚫', '  ', '⚫', '  ', '  ']])
+      described_class.new([['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                           ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                           ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                           ['  ', '  ', '  ', '⚫', '  ', '  ', '  '],
+                           ['  ', '⚪', '  ', '⚫', '  ', '  ', '  '],
+                           ['  ', '⚫', '  ', '⚫', '  ', '  ', '  ']])
     end
     context 'when column is full' do
       it 'returns false' do
@@ -115,12 +115,12 @@ describe Board do
 
   describe '#playable_slot' do
     subject(:playable_board) do
-      described_class.new([['  ', '  ', '  ', '⚪', '  ', '  '],
-                           ['  ', '  ', '  ', '⚪', '  ', '  '],
-                           ['  ', '  ', '  ', '⚪', '  ', '  '],
-                           ['  ', '  ', '  ', '⚫', '  ', '  '],
-                           ['  ', '⚪', '  ', '⚫', '  ', '  '],
-                           ['  ', '⚫', '  ', '⚫', '  ', '  ']])
+      described_class.new([['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                           ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                           ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                           ['  ', '  ', '  ', '⚫', '  ', '  ', '  '],
+                           ['  ', '⚪', '  ', '⚫', '  ', '  ', '  '],
+                           ['  ', '⚫', '  ', '⚫', '  ', '  ', '  ']])
     end
     context 'when column is empty' do
       it 'returns the bottom slot' do
@@ -154,12 +154,12 @@ describe Board do
 
   describe '#horizontal_win?' do
     subject(:horizontal_board) do
-      described_class.new([['  ', '  ', '  ', '⚪', '  ', '  '],
-                           ['  ', '  ', '  ', '⚪', '  ', '  '],
-                           ['  ', '  ', '  ', '⚪', '  ', '  '],
-                           ['  ', '  ', '  ', '⚫', '  ', '  '],
-                           ['  ', '⚪', '⚫', '⚫', '⚫', '⚫'],
-                           ['  ', '⚫', '⚫', '⚪', '⚫', '⚪']])
+      described_class.new([['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                           ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                           ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                           ['  ', '  ', '  ', '⚫', '  ', '  ', '  '],
+                           ['  ', '⚪', '⚫', '⚫', '⚫', '⚫', '  '],
+                           ['  ', '⚫', '⚫', '⚪', '⚫', '⚪', '  ']])
     end
     context 'when there is an horizontal win on the board' do
       it 'returns true' do
@@ -170,16 +170,62 @@ describe Board do
 
   describe '#vertical_win?' do
     subject(:vertical_board) do
-      described_class.new([['  ', '  ', '  ', '⚪', '  ', '  '],
-                           ['  ', '  ', '  ', '⚪', '  ', '  '],
-                           ['  ', '  ', '  ', '⚪', '  ', '  '],
-                           ['  ', '  ', '  ', '⚪', '  ', '  '],
-                           ['  ', '⚪', '⚪', '⚫', '⚫', '⚫'],
-                           ['  ', '⚫', '⚫', '⚪', '⚫', '⚪']])
+      described_class.new([['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                           ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                           ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                           ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                           ['  ', '⚪', '⚪', '⚫', '⚫', '⚫', '  '],
+                           ['  ', '⚫', '⚫', '⚪', '⚫', '⚪', '  ']])
     end
     context 'when there is a vertical win on the board' do
       it 'returns true' do
         expect(vertical_board.vertical_win?('⚪')).to be true
+      end
+    end
+  end
+
+  describe '#diagonal_left' do
+    subject(:diagonal_board) do
+      described_class.new([['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                           ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                           ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                           ['  ', '  ', '  ', '⚫', '  ', '  ', '  '],
+                           ['  ', '⚪', '⚫', '⚫', '⚫', '⚫', '  '],
+                           ['  ', '⚫', '⚫', '⚪', '⚫', '⚪', '  ']])
+    end
+    context 'when given coordinates [0,0]' do
+      it 'returns the corresponding diagonal' do
+        diagonal = ['  ', '  ', '  ', '⚫', '⚫', '⚪']
+        expect(diagonal_board.diagonal_left(0, 0)).to eq(diagonal)
+      end
+    end
+    context 'when given coordinates [2,0]' do
+      it 'returns the corresponding diagonal' do
+        diagonal = ['  ', '  ', '⚫', '⚪']
+        expect(diagonal_board.diagonal_left(2, 0)).to eq(diagonal)
+      end
+    end
+    context 'when given coordinates [0,3]' do
+      it 'returns the corresponding diagonal' do
+        diagonal = ['⚪', '  ', '  ', '  ']
+        expect(diagonal_board.diagonal_left(0, 3)).to eq(diagonal)
+      end
+    end
+  end
+
+  describe '#diagonal_right' do
+    subject(:diagonal_board) do
+      described_class.new([['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                           ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                           ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                           ['  ', '  ', '  ', '⚫', '  ', '  ', '  '],
+                           ['  ', '⚪', '⚫', '⚫', '⚫', '⚫', '  '],
+                           ['  ', '⚫', '⚫', '⚪', '⚫', '⚪', '  ']])
+    end
+    context 'when given coordinates [6,0]' do
+      it 'returns the correct diagonal' do
+        diagonal = ['  ', '  ', '  ', '⚫', '⚫', '⚫']
+        expect(diagonal_board.diagonal_right(0, 6)).to eq(diagonal)
       end
     end
   end

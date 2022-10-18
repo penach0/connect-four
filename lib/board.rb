@@ -59,4 +59,24 @@ class Board
     end
     false
   end
+
+  def diagonal_left(x, y)
+    diagonal = []
+    while board[x] && board[x][y]
+      diagonal << board[x][y]
+      x += 1
+      y += 1
+    end
+    diagonal
+  end
+
+  def diagonal_right(x, y)
+    diagonal = []
+    while board[x] && board[x][y]
+      diagonal << board[x][y]
+      x += 1
+      y -= 1
+    end
+    diagonal
+  end
 end
