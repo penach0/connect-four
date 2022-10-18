@@ -62,4 +62,28 @@ describe Player do
       end
     end
   end
+
+  describe '#random_column' do
+    let(:random_board) { instance_double('Board') }
+    context 'when random number is valid' do
+      before do
+        allow(player).to receive(:rand).and_return(5)
+        allow(random_board).to receive(:column_full?).and_return(false)
+      end
+      it 'returns the random number' do
+        random_number = 5
+        expect(player.random_column(random_board)).to eq(random_number)
+      end
+    end
+    context 'when random number is invalid once' do
+      before do
+        allow(player).to receive(:rand).and_return(5, 7)
+        allow(random_board).to receive(:column_full?).and_return(true, false)
+      end
+      it 'runs the loop twice' do
+        expect(random_board).to receive(:column_full?).twice
+        player.random_column(random_board)
+      end
+    end
+  end
 end
