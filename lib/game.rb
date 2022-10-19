@@ -25,6 +25,10 @@ class Game
     end
   end
 
+  def change_player(current_player)
+    current_player == @player1 ? @player2 : @player1
+  end
+
   def pick_color
     print 'Play as White or Black (w/b): '
     loop do
@@ -34,18 +38,6 @@ class Game
       print 'Please pick a valid option: '
     end
     answer == 'w' ? '⚪' : '⚫'
-  end
-
-  def pick_column(current_player)
-    print "#{current_player.piece} playing. Pick a number: "
-    loop do
-      column_number = gets.chomp.to_i
-
-      break current_player.make_play(board, column_number) if board.playable_slot(column_number)
-
-      print 'Not valid, pick another one: '
-    end
-
   end
 
   def print_board
