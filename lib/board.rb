@@ -80,6 +80,40 @@ class Board
     diagonal
   end
 
+  def diagonals_going_down
+    diagonals = []
+
+    0.upto(WIDTH - 1) do |column|
+      diagonal_top_side = diagonal_down(0, column)
+      diagonals << diagonal_top_side unless diagonal_top_side.size < 4
+    end
+
+    1.upto(HEIGHT - 1) do |row|
+      diagonal_left_side = diagonal_down(row, 0)
+      diagonals << diagonal_left_side unless diagonal_left_side.size < 4
+    end
+    diagonals
+  end
+
+  def diagonals_going_up
+    diagonals = []
+
+    0.upto(WIDTH - 1) do |column|
+      diagonal_bottom_side = diagonal_up(5, column)
+      diagonals << diagonal_bottom_side unless diagonal_bottom_side.size < 4
+    end
+
+    (HEIGHT - 2).downto(0) do |row|
+      diagonal_left_side = diagonal_up(row, 0)
+      diagonals << diagonal_left_side unless diagonal_left_side.size < 4
+    end
+    diagonals
+  end
+
+  def diagonals
+    diagonals_going_down.concat(diagonals_going_down).sort
+  end
+
   private
 
   def valid_position?(row, col)

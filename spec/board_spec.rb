@@ -184,7 +184,7 @@ describe Board do
     end
   end
 
-  describe '#diagonal_down' do
+  context 'when fecthing the diagonals' do
     subject(:diagonal_board) do
       described_class.new([['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
                            ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
@@ -193,39 +193,53 @@ describe Board do
                            ['  ', '⚪', '⚫', '⚫', '⚫', '⚫', '  '],
                            ['  ', '⚫', '⚫', '⚪', '⚫', '⚪', '  ']])
     end
-    context 'when given coordinates [0,0]' do
-      it 'returns the corresponding diagonal' do
-        diagonal = ['  ', '  ', '  ', '⚫', '⚫', '⚪']
-        expect(diagonal_board.diagonal_down(0, 0)).to eq(diagonal)
+    describe '#diagonal_down' do
+      context 'when given coordinates [0,0]' do
+        it 'returns the corresponding diagonal' do
+          diagonal = ['  ', '  ', '  ', '⚫', '⚫', '⚪']
+          expect(diagonal_board.diagonal_down(0, 0)).to eq(diagonal)
+        end
+      end
+      context 'when given coordinates [2,0]' do
+        it 'returns the corresponding diagonal' do
+          diagonal = ['  ', '  ', '⚫', '⚪']
+          expect(diagonal_board.diagonal_down(2, 0)).to eq(diagonal)
+        end
+      end
+      context 'when given coordinates [0,3]' do
+        it 'returns the corresponding diagonal' do
+          diagonal = ['⚪', '  ', '  ', '  ']
+          expect(diagonal_board.diagonal_down(0, 3)).to eq(diagonal)
+        end
       end
     end
-    context 'when given coordinates [2,0]' do
-      it 'returns the corresponding diagonal' do
-        diagonal = ['  ', '  ', '⚫', '⚪']
-        expect(diagonal_board.diagonal_down(2, 0)).to eq(diagonal)
-      end
-    end
-    context 'when given coordinates [0,3]' do
-      it 'returns the corresponding diagonal' do
-        diagonal = ['⚪', '  ', '  ', '  ']
-        expect(diagonal_board.diagonal_down(0, 3)).to eq(diagonal)
-      end
-    end
-  end
 
-  describe '#diagonal_up' do
-    subject(:diagonal_board) do
-      described_class.new([['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
-                           ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
-                           ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
-                           ['  ', '  ', '  ', '⚫', '  ', '  ', '  '],
-                           ['  ', '⚪', '⚫', '⚫', '⚫', '⚫', '  '],
-                           ['  ', '⚫', '⚫', '⚪', '⚫', '⚪', '  ']])
+    describe '#diagonal_up' do
+      context 'when given coordinates [0,6]' do
+        it 'returns the correct diagonal' do
+          diagonal = ['⚫', '⚫', '⚫', '  ', '  ', '  ']
+          expect(diagonal_board.diagonal_up(5, 1)).to eq(diagonal)
+        end
+      end
     end
-    context 'when given coordinates [0,6]' do
-      it 'returns the correct diagonal' do
-        diagonal = ['⚫', '⚫', '⚫', '  ', '  ', '  ']
-        expect(diagonal_board.diagonal_up(5, 1)).to eq(diagonal)
+
+    describe '#diagonals_going_down' do
+      it 'returns an array the diagonals going down that have size > 4' do
+        diagonals_down = [['  ', '  ', '  ', '⚫', '⚫', '⚪'], ['  ', '  ', '⚪', '  ', '⚫', '  '],
+                          ['  ', '⚪', '  ', '  ', '  '], ['⚪', '  ', '  ', '  '],
+                          ['  ', '  ', '  ', '⚫', '⚫'], ['  ', '  ', '⚫', '⚪']]
+
+        expect(diagonal_board.diagonals_going_down).to eq(diagonals_down)
+      end
+    end
+
+    describe '#diagonals_going_up' do
+      it 'returns an array the diagonals going up that have size > 4' do
+        diagonals_up = [['  ', '⚪', '  ', '⚪', '  ', '  '], ['⚫', '⚫', '⚫', '  ', '  ', '  '],
+                        ['⚫', '⚫', '  ', '  ', '  '], ['⚪', '⚫', '  ', '  '],
+                        ['  ', '  ', '  ', '⚪', '  '], ['  ', '  ', '  ', '⚪']]
+
+        expect(diagonal_board.diagonals_going_up).to eq(diagonals_up)
       end
     end
   end
