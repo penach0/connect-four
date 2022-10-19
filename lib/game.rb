@@ -71,4 +71,9 @@ class Game
     end
     puts base
   end
+
+  def end_message(piece)
+    return "Congratulations to player #{piece}, you won the game!!" if board.win?(piece)
+    return 'The game is drawn, good play by both players!' if board.draw?(piece)
+  end
 end

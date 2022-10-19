@@ -46,9 +46,9 @@ describe Game do
         allow(game_play).to receive(:turn)
         allow(game_play).to receive(:game_over?).and_return(true)
       end
-      it 'ends the loop and displays winning message' do
-        winning_message = 'Congratulations to player ⚪, you won the game!!'
-        expect(game_play).to receive(:puts).with(winning_message)
+      it 'ends the loop and displays victory message' do
+        victory_message = 'Congratulations to player ⚪, you won the game!!'
+        expect(game_play).to receive(:puts).with(victory_message)
         game_play.play
       end
     end
@@ -60,6 +60,28 @@ describe Game do
       it 'loops twice' do
         expect(game_play).to receive(:turn).twice
         game_play.play
+      end
+    end
+  end
+
+  describe '#end_message' do
+    subject(:game_message) { described_class.new }
+
+    context 'when game is won' do
+      it 'returns victory message' do
+        piece = '⚪'
+        victory_message = 'Congratulations to player ⚪, you won the game!!'
+        allow(game_message.board).to receive(:win?).and_return(true)
+        expect(game_message.end_message(piece)).to eq(victory_message)
+      end
+    end
+
+    context 'when game is drawn' do
+      it 'returns draw message' do
+        piece = '⚫'
+        draw_message = 'The game is drawn, good play by both players!'
+        allow(game_message.board).to receive(:draw?).and_return(true)
+        expect(game_message.end_message(piece)).to eq(draw_message)
       end
     end
   end
