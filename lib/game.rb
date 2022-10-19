@@ -9,6 +9,18 @@ class Game
     @board = Board.new
   end
 
+  def play
+    setup
+    current_player = @player1
+    loop do
+      turn(current_player)
+      break if game_over?(current_player.piece)
+
+      current_player = change_player(current_player)
+    end
+    puts 'Congratulations to player ⚪, you won the game!!'
+  end
+
   def turn(current_player)
     current_player.make_play(board)
     print_board

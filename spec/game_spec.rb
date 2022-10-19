@@ -33,18 +33,33 @@ describe Game do
     end
   end
 
-  describe '#pick_column' do
-    subject(:game_pick) { described_class.new }
-    context 'when picking an available column' do
+  describe '#play' do
+    subject(:game_play) { described_class.new }
+
+    before(:each) do
+      allow(game_play).to receive(:pick_color).and_return('⚪')
+      allow(game_play).to receive(:print_board)
+    end
+
+    context 'when game is won' do
       before do
-        allow(game_pick).to receive(:gets).and_return('1')
+        allow(game_play).to receive(:turn)
+        allow(game_play).to receive(:game_over?).and_return(true)
       end
-      it 'sends message to Player to make play' do
-        current_player = instance_double('Player', piece: '⚫')
-        board = instance_double('Board')
-        column_number = 1
-        expect(current_player).to receive(:make_play).with(board, column_number)
-        game_pick.pick_column(current_player)
+      it 'ends the loop and displays winning message' do
+        winning_message = 'Congratulations to player ⚪, you won the game!!'
+        expect(game_play).to receive(:puts).with(winning_message)
+        game_play.play
+      end
+    end
+
+    context 'when game is not won once and then won' do
+      before do
+        allow(game_play).to receive(:game_over?).and_return(false, true)
+      end
+      it 'loops twice' do
+        expect(game_play).to receive(:turn).twice
+        game_play.play
       end
     end
   end
