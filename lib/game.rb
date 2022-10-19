@@ -19,6 +19,10 @@ class Game
     print_board
   end
 
+  def game_over?(piece)
+    board.win?(piece) || board.draw?
+  end
+
   def create_players(color)
     other_color = (color == '⚪' ? '⚫' : '⚪')
     if color == '⚪'
