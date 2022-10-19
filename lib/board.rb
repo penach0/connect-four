@@ -39,6 +39,10 @@ class Board
     board[row][column] = piece
   end
 
+  def win?(piece)
+    horizontal_win?(piece) || vertical_win?(piece) || diagonal_win?(piece)
+  end
+
   def horizontal_win?(piece)
     count_pieces(piece, board)
   end
