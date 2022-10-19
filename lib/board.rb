@@ -7,6 +7,7 @@ class Board
   def initialize(board = nil)
     @board = board || Array.new(HEIGHT) { Array.new(WIDTH, '  ') }
     @columns = @board.transpose
+    @diagonals = all_diagonals
   end
 
   def column(number)
@@ -81,37 +82,37 @@ class Board
   end
 
   def diagonals_going_down
-    diagonals = []
+    diagonals_down = []
 
     0.upto(WIDTH - 1) do |column|
       diagonal_top_side = diagonal_down(0, column)
-      diagonals << diagonal_top_side unless diagonal_top_side.size < 4
+      diagonals_down << diagonal_top_side unless diagonal_top_side.size < 4
     end
 
     1.upto(HEIGHT - 1) do |row|
       diagonal_left_side = diagonal_down(row, 0)
-      diagonals << diagonal_left_side unless diagonal_left_side.size < 4
+      diagonals_down << diagonal_left_side unless diagonal_left_side.size < 4
     end
-    diagonals
+    diagonals_down
   end
 
   def diagonals_going_up
-    diagonals = []
+    diagonals_up = []
 
     0.upto(WIDTH - 1) do |column|
       diagonal_bottom_side = diagonal_up(5, column)
-      diagonals << diagonal_bottom_side unless diagonal_bottom_side.size < 4
+      diagonals_up << diagonal_bottom_side unless diagonal_bottom_side.size < 4
     end
 
     (HEIGHT - 2).downto(0) do |row|
       diagonal_left_side = diagonal_up(row, 0)
-      diagonals << diagonal_left_side unless diagonal_left_side.size < 4
+      diagonals_up << diagonal_left_side unless diagonal_left_side.size < 4
     end
-    diagonals
+    diagonals_up
   end
 
-  def diagonals
-    diagonals_going_down.concat(diagonals_going_down).sort
+  def all_diagonals
+    diagonals_going_down.concat(diagonals_going_up)
   end
 
   private
