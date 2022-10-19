@@ -18,7 +18,7 @@ class Game
 
       current_player = change_player(current_player)
     end
-    puts 'Congratulations to player ⚪, you won the game!!'
+    puts end_message(current_player.piece)
   end
 
   def turn(current_player)
@@ -32,7 +32,7 @@ class Game
   end
 
   def game_over?(piece)
-    board.win?(piece) || board.draw?
+    board.win?(piece) || board.draw?(piece)
   end
 
   def create_players(color)
@@ -52,6 +52,7 @@ class Game
 
   def pick_color
     print 'Play as White or Black (w/b): '
+    answer = ''
     loop do
       answer = gets.chomp.downcase
       break if %w[w b].include?(answer)

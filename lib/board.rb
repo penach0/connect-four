@@ -1,13 +1,16 @@
 class Board
-  attr_reader :board, :columns, :diagonals
+  attr_reader :board, :diagonals
 
   HEIGHT = 6
   WIDTH = 7
 
   def initialize(board = nil)
     @board = board || Array.new(HEIGHT) { Array.new(WIDTH, '  ') }
-    @columns = @board.transpose
     @diagonals = all_diagonals
+  end
+
+  def columns
+    board.transpose
   end
 
   def column(number)
@@ -34,7 +37,7 @@ class Board
   end
 
   def update_slot(number, piece)
-    column = number
+    column = number - 1
     row = playable_slot(number)
     board[row][column] = piece
   end
@@ -60,10 +63,10 @@ class Board
   end
 
   def count_pieces(piece, direction)
-    count = 0
-
     direction.each do |line|
       next if line.count(piece) < 4
+
+      count = 0
 
       line.each do |slot|
         slot == piece ? count += 1 : count = 0

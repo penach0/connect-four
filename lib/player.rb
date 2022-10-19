@@ -30,7 +30,7 @@ class Player
   # Computer play
   def random_column(board)
     loop do
-      column_number = rand(1, 7)
+      column_number = rand(1..7)
       return column_number unless board.column_full?(column_number)
     end
   end

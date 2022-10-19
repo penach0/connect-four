@@ -140,14 +140,14 @@ describe Board do
         column = 1
         piece = '⚪'
         board.update_slot(column, piece)
-        expect(board.board[5][1]).to eq(piece)
+        expect(board.board[5][0]).to eq(piece)
       end
 
       it 'updates the value of the playable slot to ⚫' do
         column = 2
         piece = '⚫'
         board.update_slot(column, piece)
-        expect(board.board[5][2]).to eq(piece)
+        expect(board.board[5][1]).to eq(piece)
       end
     end
   end
@@ -215,16 +215,16 @@ describe Board do
   context 'when checking for wins' do
     describe '#horizontal_win?' do
       subject(:horizontal_board) do
-        described_class.new([['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
-                             ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
-                             ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
-                             ['  ', '  ', '  ', '⚫', '  ', '  ', '  '],
-                             ['  ', '⚪', '⚫', '⚫', '⚫', '⚫', '  '],
-                             ['  ', '⚫', '⚫', '⚪', '⚫', '⚪', '  ']])
+        described_class.new([['  ', '  ', '  ', '  ', '  ', '  ', '  '],
+                             ['  ', '  ', '  ', '  ', '⚪', '⚫', '  '],
+                             ['⚫', '  ', '⚪', '⚪', '⚪', '⚪', '  '],
+                             ['⚪', '⚫', '⚫', '⚪', '⚫', '⚪', '⚫'],
+                             ['⚪', '⚫', '⚪', '⚫', '⚪', '⚫', '⚪'],
+                             ['⚫', '⚫', '⚪', '⚫', '⚪', '⚫', '⚪']])
       end
       context 'when there is an horizontal win on the board' do
         it 'returns true' do
-          expect(horizontal_board).to be_horizontal_win('⚫')
+          expect(horizontal_board).to be_horizontal_win('⚪')
         end
       end
     end
