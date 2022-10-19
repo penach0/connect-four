@@ -60,7 +60,7 @@ class Board
     false
   end
 
-  def diagonal_left(row, col)
+  def diagonal_down(row, col)
     diagonal = []
     while valid_position?(row, col)
       diagonal << board[row][col]
@@ -70,12 +70,12 @@ class Board
     diagonal
   end
 
-  def diagonal_right(row, col)
+  def diagonal_up(row, col)
     diagonal = []
     while valid_position?(row, col)
       diagonal << board[row][col]
-      row += 1
-      col -= 1
+      row -= 1
+      col += 1
     end
     diagonal
   end

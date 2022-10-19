@@ -184,7 +184,7 @@ describe Board do
     end
   end
 
-  describe '#diagonal_left' do
+  describe '#diagonal_down' do
     subject(:diagonal_board) do
       described_class.new([['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
                            ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
@@ -196,24 +196,24 @@ describe Board do
     context 'when given coordinates [0,0]' do
       it 'returns the corresponding diagonal' do
         diagonal = ['  ', '  ', '  ', '⚫', '⚫', '⚪']
-        expect(diagonal_board.diagonal_left(0, 0)).to eq(diagonal)
+        expect(diagonal_board.diagonal_down(0, 0)).to eq(diagonal)
       end
     end
     context 'when given coordinates [2,0]' do
       it 'returns the corresponding diagonal' do
         diagonal = ['  ', '  ', '⚫', '⚪']
-        expect(diagonal_board.diagonal_left(2, 0)).to eq(diagonal)
+        expect(diagonal_board.diagonal_down(2, 0)).to eq(diagonal)
       end
     end
     context 'when given coordinates [0,3]' do
       it 'returns the corresponding diagonal' do
         diagonal = ['⚪', '  ', '  ', '  ']
-        expect(diagonal_board.diagonal_left(0, 3)).to eq(diagonal)
+        expect(diagonal_board.diagonal_down(0, 3)).to eq(diagonal)
       end
     end
   end
 
-  describe '#diagonal_right' do
+  describe '#diagonal_up' do
     subject(:diagonal_board) do
       described_class.new([['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
                            ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
@@ -224,8 +224,8 @@ describe Board do
     end
     context 'when given coordinates [0,6]' do
       it 'returns the correct diagonal' do
-        diagonal = ['  ', '  ', '  ', '⚫', '⚫', '⚫']
-        expect(diagonal_board.diagonal_right(0, 6)).to eq(diagonal)
+        diagonal = ['⚫', '⚫', '⚫', '  ', '  ', '  ']
+        expect(diagonal_board.diagonal_up(5, 1)).to eq(diagonal)
       end
     end
   end
