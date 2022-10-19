@@ -43,6 +43,10 @@ class Board
     horizontal_win?(piece) || vertical_win?(piece) || diagonal_win?(piece)
   end
 
+  def draw?(piece)
+    board_full? && !win?(piece)
+  end
+
   def horizontal_win?(piece)
     count_pieces(piece, board)
   end
