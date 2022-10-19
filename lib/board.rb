@@ -1,5 +1,5 @@
 class Board
-  attr_reader :board, :columns
+  attr_reader :board, :columns, :diagonals
 
   HEIGHT = 6
   WIDTH = 7
@@ -45,6 +45,10 @@ class Board
 
   def vertical_win?(piece)
     count_pieces(piece, columns)
+  end
+
+  def diagonal_win?(piece)
+    count_pieces(piece, diagonals)
   end
 
   def count_pieces(piece, direction)

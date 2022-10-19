@@ -152,38 +152,6 @@ describe Board do
     end
   end
 
-  describe '#horizontal_win?' do
-    subject(:horizontal_board) do
-      described_class.new([['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
-                           ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
-                           ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
-                           ['  ', '  ', '  ', '⚫', '  ', '  ', '  '],
-                           ['  ', '⚪', '⚫', '⚫', '⚫', '⚫', '  '],
-                           ['  ', '⚫', '⚫', '⚪', '⚫', '⚪', '  ']])
-    end
-    context 'when there is an horizontal win on the board' do
-      it 'returns true' do
-        expect(horizontal_board.horizontal_win?('⚫')).to be true
-      end
-    end
-  end
-
-  describe '#vertical_win?' do
-    subject(:vertical_board) do
-      described_class.new([['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
-                           ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
-                           ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
-                           ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
-                           ['  ', '⚪', '⚪', '⚫', '⚫', '⚫', '  '],
-                           ['  ', '⚫', '⚫', '⚪', '⚫', '⚪', '  ']])
-    end
-    context 'when there is a vertical win on the board' do
-      it 'returns true' do
-        expect(vertical_board.vertical_win?('⚪')).to be true
-      end
-    end
-  end
-
   context 'when fecthing the diagonals' do
     subject(:diagonal_board) do
       described_class.new([['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
@@ -240,6 +208,61 @@ describe Board do
                         ['  ', '  ', '  ', '⚪', '  '], ['  ', '  ', '  ', '⚪']]
 
         expect(diagonal_board.diagonals_going_up).to eq(diagonals_up)
+      end
+    end
+  end
+
+  context 'when checking for wins' do
+    describe '#horizontal_win?' do
+      subject(:horizontal_board) do
+        described_class.new([['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                             ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                             ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                             ['  ', '  ', '  ', '⚫', '  ', '  ', '  '],
+                             ['  ', '⚪', '⚫', '⚫', '⚫', '⚫', '  '],
+                             ['  ', '⚫', '⚫', '⚪', '⚫', '⚪', '  ']])
+      end
+      context 'when there is an horizontal win on the board' do
+        it 'returns true' do
+          expect(horizontal_board).to be_horizontal_win('⚫')
+        end
+      end
+    end
+
+    describe '#vertical_win?' do
+      subject(:vertical_board) do
+        described_class.new([['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                             ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                             ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                             ['  ', '  ', '  ', '⚪', '  ', '  ', '  '],
+                             ['  ', '⚪', '⚪', '⚫', '⚫', '⚫', '  '],
+                             ['  ', '⚫', '⚫', '⚪', '⚫', '⚪', '  ']])
+      end
+      context 'when there is a vertical win on the board' do
+        it 'returns true' do
+          expect(vertical_board).to be_vertical_win('⚪')
+        end
+      end
+    end
+
+    describe '#diagonal_win?' do
+      subject(:diagonal_board) do
+        described_class.new([['  ', '  ', '  ', '  ', '  ', '  ', '  '],
+                             ['  ', '  ', '  ', '  ', '  ', '  ', '  '],
+                             ['⚪', '  ', '  ', '  ', '  ', '  ', '  '],
+                             ['⚫', '⚪', '  ', '⚪', '  ', '  ', '  '],
+                             ['⚫', '⚪', '⚪', '⚫', '⚫', '⚫', '  '],
+                             ['⚪', '⚫', '⚫', '⚪', '⚫', '⚪', '  ']])
+      end
+      context 'when there is a diagonal win on the board' do
+        it 'returns true' do
+          expect(diagonal_board).to be_diagonal_win('⚪')
+        end
+      end
+      context 'when there is no win' do
+        it 'returns false' do
+          expect(diagonal_board).not_to be_diagonal_win('⚫')
+        end
       end
     end
   end
