@@ -9,6 +9,11 @@ class Game
     @board = Board.new
   end
 
+  def turn(current_player)
+    current_player.make_play(board)
+    print_board
+  end
+
   def setup
     create_players(pick_color)
     print_board
