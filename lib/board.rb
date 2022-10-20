@@ -1,3 +1,6 @@
+# Describes a Connect 4 board
+# Responsible for creating the board, fecthing and updating data from the it
+# and checking for wins
 class Board
   attr_reader :board, :diagonals
 

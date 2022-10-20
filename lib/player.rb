@@ -1,3 +1,6 @@
+# Describes a player of the game
+# The game is currently set up for Human vs Computer
+# Human plays by picking a column Computer plays random
 class Player
   attr_reader :piece
 
