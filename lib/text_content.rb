@@ -1,5 +1,35 @@
 # This module will hold text content for message display
 module TextContent
+  def introduction
+    system('clear')
+    puts INTRODUCTION
+    gets.chomp
+  end
+
+  def message(message, piece = nil)
+    {
+      pick_number: "#{piece} playing. Pick a number: ",
+      invalid_number: 'Not valid, pick another one: ',
+      black_or_white: 'Play as White or Black (w/b): ',
+      invalid_option: 'Please pick a valid option: ',
+      victory: "Congratulations to player #{piece}, you won the game!!",
+      draw: 'The game is drawn, good play by both players!',
+      play_again: 'Do you want to play again (Y/N)? '
+    }[message]
+  end
+
+  def print_board
+    system('clear')
+    puts TOP
+    board.board.each do |row|
+      puts "  ┃#{row.join('|')}┃"
+    end
+    puts BASE
+  end
+
+  TOP = '   ➊  ➋  ➌  ➍  ➎  ➏  ➐'.freeze
+  BASE = ' ╱╱‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾╲╲'.freeze
+
   INTRODUCTION = <<~HEREDOC.freeze
 
 
@@ -21,32 +51,4 @@ module TextContent
 
     Press enter to continue:
   HEREDOC
-
-  def introduction
-    puts INTRODUCTION
-    gets.chomp
-  end
-
-  def message(message, piece = nil)
-    {
-      pick_number: "#{piece} playing. Pick a number: ",
-      invalid_number: 'Not valid, pick another one: ',
-      black_or_white: 'Play as White or Black (w/b): ',
-      invalid_option: 'Please pick a valid option: ',
-      victory: "Congratulations to player #{piece}, you won the game!!",
-      draw: 'The game is drawn, good play by both players!',
-      play_again: 'Do you want to play again (Y/N)? '
-    }[message]
-  end
-
-  def print_board
-    top = '   ➊  ➋  ➌  ➍  ➎  ➏  ➐'
-    base = ' ╱╱‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾╲╲'
-
-    puts top
-    board.board.each do |row|
-      puts "  ┃#{row.join('|')}┃"
-    end
-    puts base
-  end
 end
