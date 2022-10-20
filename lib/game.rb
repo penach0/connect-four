@@ -1,8 +1,10 @@
 require_relative 'board'
 require_relative 'player'
+require_relative 'text_content'
 
 # Represents a single game of Connect 4
 class Game
+  include TextContent
   attr_reader :board
 
   def initialize
@@ -28,18 +30,19 @@ class Game
   end
 
   def setup
+    introduction
     create_players(pick_color)
     print_board
   end
 
   def play_again?
-    print 'Do you want to play again? '
+    print message(:play_again)
     loop do
       answer = gets.chomp.downcase
       return true if answer == 'y'
       return false if answer == 'n'
 
-      print 'Not valid, try again: '
+      print message(:invalid_option)
     end
   end
 
@@ -63,30 +66,19 @@ class Game
   end
 
   def pick_color
-    print 'Play as White or Black (w/b): '
+    print message(:black_or_white)
     answer = ''
     loop do
       answer = gets.chomp.downcase
       break if %w[w b].include?(answer)
 
-      print 'Please pick a valid option: '
+      print message(:invalid_option)
     end
     answer == 'w' ? '⚪' : '⚫'
   end
 
-  def print_board
-    top = '   ➊  ➋  ➌  ➍  ➎  ➏  ➐'
-    base = ' ╱╱‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾╲╲'
-
-    puts top
-    board.board.each do |row|
-      puts "  ┃#{row.join('|')}┃"
-    end
-    puts base
-  end
-
   def end_message(piece)
-    return "Congratulations to player #{piece}, you won the game!!" if board.win?(piece)
-    return 'The game is drawn, good play by both players!' if board.draw?(piece)
+    return message(:victory, piece) if board.win?(piece)
+    return message(:draw) if board.draw?(piece)
   end
 end

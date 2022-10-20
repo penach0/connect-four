@@ -1,7 +1,10 @@
+require_relative 'text_content'
+
 # Describes a player of the game
 # The game is currently set up for Human vs Computer
 # Human plays by picking a column Computer plays random
 class Player
+  include TextContent
   attr_reader :piece
 
   def initialize(piece, type)
@@ -20,13 +23,13 @@ class Player
 
   # Human play
   def pick_column(board)
-    print "#{piece} playing. Pick a number: "
+    print message(:pick_number, piece)
     loop do
       column_number = gets.chomp.to_i
 
       return column_number if board.valid_play?(column_number)
 
-      print 'Not valid, pick another one: '
+      print message(:invalid_number)
     end
   end
 
