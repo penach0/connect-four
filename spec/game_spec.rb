@@ -43,8 +43,11 @@ describe Game do
 
     context 'when game is won' do
       before do
+        allow(game_play).to receive(:introduction)
         allow(game_play).to receive(:turn)
         allow(game_play).to receive(:game_over?).and_return(true)
+        allow(game_play.board).to receive(:win?).and_return(true)
+        allow(game_play).to receive(:play_again?).and_return(false)
       end
       it 'ends the loop and displays victory message' do
         victory_message = 'Congratulations to player ⚪, you won the game!!'
@@ -56,6 +59,7 @@ describe Game do
     context 'when game is not won once and then won' do
       before do
         allow(game_play).to receive(:game_over?).and_return(false, true)
+        allow(game_play).to receive(:play_again?).and_return(false)
       end
       it 'loops twice' do
         expect(game_play).to receive(:turn).twice
@@ -82,6 +86,35 @@ describe Game do
         draw_message = 'The game is drawn, good play by both players!'
         allow(game_message.board).to receive(:draw?).and_return(true)
         expect(game_message.end_message(piece)).to eq(draw_message)
+      end
+    end
+  end
+
+  describe '#game_end' do
+    subject(:game_ending) { described_class.new }
+    let(:winning_player) { instance_double('Player', piece: '⚪') }
+    context 'when winning player is ⚪' do
+      before do
+        allow(game_ending.board).to receive(:win?).and_return(true)
+        allow(game_ending).to receive(:play_again?).and_return(false)
+      end
+
+      it 'prints appropriate message' do
+        victory_message = 'Congratulations to player ⚪, you won the game!!'
+        expect(game_ending).to receive(:puts).with(victory_message)
+        game_ending.game_end(winning_player)
+      end
+    end
+    context 'when user wants to play again' do
+      let(:new_game) { described_class.new }
+      before do
+        allow(game_ending).to receive(:end_message)
+        allow(game_ending).to receive(:play_again?).and_return(true)
+        allow(new_game).to receive(:play)
+      end
+      it 'sends message to Game to create new instance' do
+        expect(Game).to receive(:new).and_return(new_game)
+        game_ending.game_end(winning_player)
       end
     end
   end

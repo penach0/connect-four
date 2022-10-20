@@ -20,8 +20,13 @@ class Game
 
       current_player = change_player(current_player)
     end
-    puts end_message(current_player.piece)
-    Game.new.play if play_again?
+    game_end(current_player)
+  end
+
+  def setup
+    introduction
+    create_players(pick_color)
+    print_board
   end
 
   def turn(current_player)
@@ -29,10 +34,9 @@ class Game
     print_board
   end
 
-  def setup
-    introduction
-    create_players(pick_color)
-    print_board
+  def game_end(current_player)
+    puts end_message(current_player.piece)
+    Game.new.play if play_again?
   end
 
   def play_again?
