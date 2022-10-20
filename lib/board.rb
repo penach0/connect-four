@@ -2,14 +2,13 @@
 # Responsible for creating the board, fecthing and updating data from the it
 # and checking for wins
 class Board
-  attr_reader :board, :diagonals
+  attr_reader :board
 
   HEIGHT = 6
   WIDTH = 7
 
   def initialize(board = nil)
     @board = board || Array.new(HEIGHT) { Array.new(WIDTH, '  ') }
-    @diagonals = all_diagonals
   end
 
   def columns
@@ -62,7 +61,7 @@ class Board
   end
 
   def diagonal_win?(piece)
-    count_pieces(piece, diagonals)
+    count_pieces(piece, all_diagonals)
   end
 
   def count_pieces(piece, direction)
