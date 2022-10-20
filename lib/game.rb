@@ -19,6 +19,7 @@ class Game
       current_player = change_player(current_player)
     end
     puts end_message(current_player.piece)
+    Game.new.play if play_again?
   end
 
   def turn(current_player)
@@ -29,6 +30,17 @@ class Game
   def setup
     create_players(pick_color)
     print_board
+  end
+
+  def play_again?
+    print 'Do you want to play again? '
+    loop do
+      answer = gets.chomp.downcase
+      return true if answer == 'y'
+      return false if answer == 'n'
+
+      print 'Not valid, try again: '
+    end
   end
 
   def game_over?(piece)
