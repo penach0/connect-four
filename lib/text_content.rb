@@ -9,6 +9,7 @@ module TextContent
   def message(message, piece = nil)
     {
       pick_number: "#{piece} playing. Pick a number: ",
+      computer_playing: "Computer #{piece} is playing...",
       invalid_number: 'Not valid, pick another one: ',
       black_or_white: 'Play as White or Black (w/b): ',
       invalid_option: 'Please pick a valid option: ',

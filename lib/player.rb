@@ -15,13 +15,16 @@ class Player
   def make_play(board)
     case @type
     when 'human'
-      board.update_slot(pick_column(board), piece)
+      human_play(board)
     when 'computer'
-      board.update_slot(random_column(board), piece)
+      computer_play(board)
     end
   end
 
-  # Human play
+  def human_play(board)
+    board.update_slot(pick_column(board), piece)
+  end
+
   def pick_column(board)
     print message(:pick_number, piece)
     loop do
@@ -33,7 +36,12 @@ class Player
     end
   end
 
-  # Computer play
+  def computer_play(board)
+    puts message(:computer_playing, piece)
+    sleep(0.8)
+    board.update_slot(random_column(board), piece)
+  end
+
   def random_column(board)
     loop do
       column_number = rand(1..7)
