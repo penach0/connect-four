@@ -9,18 +9,13 @@ class Game
 
   def initialize
     @board = Board.new
+    @winner = nil
   end
 
   def play
     setup
-    current_player = @player1
-    loop do
-      turn(current_player)
-      break if game_over?(current_player.piece)
-
-      current_player = change_player(current_player)
-    end
-    game_end(current_player)
+    playing
+    game_end
   end
 
   def setup
@@ -29,14 +24,25 @@ class Game
     print_board
   end
 
+  def playing
+    current_player = @player1
+    loop do
+      turn(current_player)
+      break if game_over?(current_player.piece)
+
+      current_player = change_player(current_player)
+    end
+    @winner = current_player
+  end
+
+  def game_end
+    puts end_message(@winner.piece)
+    Game.new.play if play_again?
+  end
+
   def turn(current_player)
     current_player.make_play(board)
     print_board
-  end
-
-  def game_end(current_player)
-    puts end_message(current_player.piece)
-    Game.new.play if play_again?
   end
 
   def play_again?
