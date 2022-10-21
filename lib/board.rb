@@ -53,27 +53,32 @@ class Board
   end
 
   def horizontal_win?(piece)
-    count_pieces(piece, board)
+    check_for_wins?(piece, board)
   end
 
   def vertical_win?(piece)
-    count_pieces(piece, columns)
+    check_for_wins?(piece, columns)
   end
 
   def diagonal_win?(piece)
-    count_pieces(piece, all_diagonals)
+    check_for_wins?(piece, all_diagonals)
   end
 
-  def count_pieces(piece, direction)
+  def check_for_wins?(piece, direction)
     direction.each do |line|
       next if line.count(piece) < 4
 
-      count = 0
+      return true if count_pieces(line, piece)
+    end
+    false
+  end
 
-      line.each do |slot|
-        slot == piece ? count += 1 : count = 0
-        return true if count == 4
-      end
+  def count_pieces(line, piece)
+    count = 0
+
+    line.each do |slot|
+      slot == piece ? count += 1 : count = 0
+      return true if count == 4
     end
     false
   end
