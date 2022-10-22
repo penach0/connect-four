@@ -59,8 +59,9 @@ class Game
 
   def create_players
     first_choice = pick_color
-    @player_white = Player.new('⚪', first_choice == '⚪' ? 'human' : opponent_type)
-    @player_black = Player.new('⚫', first_choice == '⚫' ? 'human' : opponent_type)
+    type = ->(piece) { first_choice == piece ? 'human' : opponent_type }
+    @player_white = Player.new('⚪', type.call('⚪'))
+    @player_black = Player.new('⚫', type.call('⚫'))
   end
 
   def opponent_type
