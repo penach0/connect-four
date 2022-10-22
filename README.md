@@ -4,6 +4,7 @@ In this project I will explore the TDD methodology
 
 ## Instructions
 
+- You can run this game online on [Replit](https://replit.com/@penach0/Connect-Four?v=1)
 - Choose your color piece (Black or White, white always goes first)
 - Choose your opponent type (Computer or another human)
 - Make a play by picking the number of the column where you want to drop a piece.
@@ -13,6 +14,8 @@ The piece will occupy the first available slot from the bottom
 diagonal)
 - First player to connect 4 wins
 - If no player connected 4 and the board is full the game ends in a draw
+
+[![Run on Repl.it](https://replit.com/badge/github/penach0/connect-four)](https://replit.com/new/github/penach0/connect-four)
 
 ## Takeaways
 
