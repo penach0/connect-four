@@ -1,10 +1,12 @@
 require_relative 'board'
 require_relative 'player'
 require_relative 'text_content'
+require_relative 'input'
 
 # Represents a single game of Connect 4
 class Game
   include TextContent
+  include Input
   attr_reader :board
 
   def initialize
@@ -47,13 +49,7 @@ class Game
 
   def play_again?
     print message(:play_again)
-    loop do
-      answer = gets.chomp.downcase
-      return true if answer == 'y'
-      return false if answer == 'n'
-
-      print message(:invalid_option)
-    end
+    yes_or_no?
   end
 
   def game_over?(piece)
@@ -76,15 +72,8 @@ class Game
   end
 
   def pick_color
-    print message(:black_or_white)
-    answer = ''
-    loop do
-      answer = gets.chomp.downcase
-      break if %w[w b].include?(answer)
-
-      print message(:invalid_option)
-    end
-    answer == 'w' ? '⚪' : '⚫'
+    print message(:ask_color)
+    black_or_white == 'w' ? '⚪' : '⚫'
   end
 
   def end_message(piece)
