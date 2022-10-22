@@ -7,7 +7,7 @@ require_relative 'input'
 class Player
   include TextContent
   include Input
-  attr_reader :piece
+  attr_reader :piece, :type
 
   def initialize(piece, type)
     @piece = piece

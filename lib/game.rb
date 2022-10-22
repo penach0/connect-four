@@ -9,11 +9,11 @@ class Game
   include Input
   attr_reader :board, :player_white, :player_black
 
-  def initialize
+  def initialize(player_white = nil, player_black = nil, current_player = nil)
     @board = Board.new
-    @player_white = nil
-    @player_black = nil
-    @current_player = nil
+    @player_white = player_white
+    @player_black = player_black
+    @current_player = current_player
   end
 
   def play
@@ -24,7 +24,7 @@ class Game
 
   def setup
     introduction
-    create_players
+    create_players unless player_white
     @current_player = player_white
     print_board
   end
@@ -39,7 +39,7 @@ class Game
   end
 
   def game_end
-    puts end_message(@current_player.piece)
+    puts end_message
     Game.new.play if play_again?
   end
 
@@ -77,7 +77,8 @@ class Game
     black_or_white == 'w' ? '⚪' : '⚫'
   end
 
-  def end_message(piece)
+  def end_message
+    piece = @current_player.piece
     return message(:victory, piece) if board.win?(piece)
     return message(:draw) if board.draw?(piece)
   end

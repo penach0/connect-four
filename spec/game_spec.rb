@@ -7,8 +7,10 @@ describe Game do
 
     it 'creates players' do
       player = class_double('Player').as_stubbed_const
+      allow(game_players).to receive(:pick_color).and_return('⚪')
+      allow(game_players).to receive(:opponent_type)
       expect(player).to receive(:new).twice
-      game_players.create_players('⚪')
+      game_players.create_players
     end
   end
 
@@ -23,7 +25,7 @@ describe Game do
                '  ┃  |  |  |  |  |  |  ┃',
                '  ┃  |  |  |  |  |  |  ┃',
                '  ┃  |  |  |  |  |  |  ┃',
-               ' ╱╱‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾╲╲']
+               " ╱╱‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾╲╲\n\n"]
 
       board.each do |line|
         expect(game_print).to receive(:puts).with(line)
@@ -34,7 +36,9 @@ describe Game do
   end
 
   describe '#play' do
-    subject(:game_play) { described_class.new }
+    let(:player_white) { instance_double('Player', piece: '⚪', type: 'human') }
+    let(:player_black) { instance_double('Player', piece: '⚫', type: 'human') }
+    subject(:game_play) { described_class.new(player_white, player_black) }
 
     before(:each) do
       allow(game_play).to receive(:pick_color).and_return('⚪')
@@ -69,30 +73,34 @@ describe Game do
   end
 
   describe '#end_message' do
-    subject(:game_message) { described_class.new }
+    let(:player_white) { instance_double('Player', piece: '⚪', type: 'human') }
+    let(:player_black) { instance_double('Player', piece: '⚫', type: 'human') }
+    let(:current_player) { player_white }
+    subject(:game_message) { described_class.new(player_white, player_black, current_player) }
 
     context 'when game is won' do
       it 'returns victory message' do
-        piece = '⚪'
         victory_message = 'Congratulations to player ⚪, you won the game!!'
         allow(game_message.board).to receive(:win?).and_return(true)
-        expect(game_message.end_message(piece)).to eq(victory_message)
+        expect(game_message.end_message).to eq(victory_message)
       end
     end
 
     context 'when game is drawn' do
       it 'returns draw message' do
-        piece = '⚫'
         draw_message = 'The game is drawn, good play by both players!'
         allow(game_message.board).to receive(:draw?).and_return(true)
-        expect(game_message.end_message(piece)).to eq(draw_message)
+        expect(game_message.end_message).to eq(draw_message)
       end
     end
   end
 
   describe '#game_end' do
-    subject(:game_ending) { described_class.new }
-    let(:winning_player) { instance_double('Player', piece: '⚪') }
+    let(:player_white) { instance_double('Player', piece: '⚪', type: 'human') }
+    let(:player_black) { instance_double('Player', piece: '⚫', type: 'human') }
+    let(:current_player) { player_white }
+    subject(:game_ending) { described_class.new(player_white, player_black, current_player) }
+
     context 'when winning player is ⚪' do
       before do
         allow(game_ending.board).to receive(:win?).and_return(true)
@@ -102,7 +110,7 @@ describe Game do
       it 'prints appropriate message' do
         victory_message = 'Congratulations to player ⚪, you won the game!!'
         expect(game_ending).to receive(:puts).with(victory_message)
-        game_ending.game_end(winning_player)
+        game_ending.game_end
       end
     end
     context 'when user wants to play again' do
@@ -114,7 +122,7 @@ describe Game do
       end
       it 'sends message to Game to create new instance' do
         expect(Game).to receive(:new).and_return(new_game)
-        game_ending.game_end(winning_player)
+        game_ending.game_end
       end
     end
   end
