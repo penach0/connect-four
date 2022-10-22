@@ -7,13 +7,13 @@ require_relative 'input'
 class Game
   include TextContent
   include Input
-  attr_reader :board
+  attr_reader :board, :player_white, :player_black
 
   def initialize
     @board = Board.new
     @player_white = nil
     @player_black = nil
-    @winner = nil
+    @current_player = nil
   end
 
   def play
@@ -25,27 +25,26 @@ class Game
   def setup
     introduction
     create_players
+    @current_player = player_white
     print_board
   end
 
   def playing
-    current_player = @player_white
     loop do
-      turn(current_player)
-      break if game_over?(current_player.piece)
+      turn
+      break if game_over?(@current_player.piece)
 
-      current_player = change_player(current_player)
+      change_player
     end
-    @winner = current_player
   end
 
   def game_end
-    puts end_message(@winner.piece)
+    puts end_message(@current_player.piece)
     Game.new.play if play_again?
   end
 
-  def turn(current_player)
-    current_player.make_play(board)
+  def turn
+    @current_player.make_play(board)
     print_board
   end
 
@@ -69,8 +68,8 @@ class Game
     computer_or_human
   end
 
-  def change_player(current_player)
-    current_player == @player_white ? @player_black : @player_white
+  def change_player
+    @current_player = (@current_player == player_white ? player_black : player_white)
   end
 
   def pick_color
