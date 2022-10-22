@@ -8,10 +8,10 @@ module TextContent
 
   def message(message, piece = nil)
     {
-      pick_number: "#{piece} playing. Pick a number: ",
+      ask_number: "#{piece} playing. Pick a number: ",
       computer_playing: "Computer #{piece} is playing...",
       invalid_number: 'Not valid, pick another one: ',
-      black_or_white: 'Play as White or Black (w/b): ',
+      ask_color: 'Play as White or Black? (W/B): ',
       invalid_option: 'Please pick a valid option: ',
       victory: "Congratulations to player #{piece}, you won the game!!",
       draw: 'The game is drawn, good play by both players!',
@@ -29,7 +29,7 @@ module TextContent
   end
 
   TOP = '   ➊  ➋  ➌  ➍  ➎  ➏  ➐'.freeze
-  BASE = ' ╱╱‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾╲╲'.freeze
+  BASE = " ╱╱‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾╲╲\n\n".freeze
 
   INTRODUCTION = <<~HEREDOC.freeze
 

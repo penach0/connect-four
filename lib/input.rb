@@ -18,4 +18,13 @@ module Input
       print message(:invalid_option)
     end
   end
+
+  def pick_number(board)
+    loop do
+      column_number = gets.chomp.to_i
+      return column_number if board.valid_play?(column_number)
+
+      print message(:invalid_number)
+    end
+  end
 end
