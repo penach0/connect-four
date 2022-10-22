@@ -12,6 +12,7 @@ module TextContent
       computer_playing: "Computer #{piece} is playing...",
       invalid_number: 'Not valid, pick another one: ',
       ask_color: 'Play as White or Black? (W/B): ',
+      ask_opponent: 'Play vs computer or human? (input full words please): ',
       invalid_option: 'Please pick a valid option: ',
       victory: "Congratulations to player #{piece}, you won the game!!",
       draw: 'The game is drawn, good play by both players!',

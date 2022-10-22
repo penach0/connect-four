@@ -27,4 +27,13 @@ module Input
       print message(:invalid_number)
     end
   end
+
+  def computer_or_human
+    loop do
+      answer = gets.chomp.downcase
+      return answer if %w[computer human].include?(answer)
+
+      print message(:invalid_option)
+    end
+  end
 end

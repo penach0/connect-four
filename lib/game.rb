@@ -11,6 +11,8 @@ class Game
 
   def initialize
     @board = Board.new
+    @player_white = nil
+    @player_black = nil
     @winner = nil
   end
 
@@ -22,12 +24,12 @@ class Game
 
   def setup
     introduction
-    create_players(pick_color)
+    create_players
     print_board
   end
 
   def playing
-    current_player = @player1
+    current_player = @player_white
     loop do
       turn(current_player)
       break if game_over?(current_player.piece)
@@ -56,19 +58,19 @@ class Game
     board.win?(piece) || board.draw?(piece)
   end
 
-  def create_players(color)
-    other_color = (color == '⚪' ? '⚫' : '⚪')
-    if color == '⚪'
-      @player1 = Player.new(color, 'human')
-      @player2 = Player.new(other_color, 'computer')
-    else
-      @player1 = Player.new(other_color, 'computer')
-      @player2 = Player.new(color, 'human')
-    end
+  def create_players
+    first_choice = pick_color
+    @player_white = Player.new('⚪', first_choice == '⚪' ? 'human' : opponent_type)
+    @player_black = Player.new('⚫', first_choice == '⚫' ? 'human' : opponent_type)
+  end
+
+  def opponent_type
+    print message(:ask_opponent)
+    computer_or_human
   end
 
   def change_player(current_player)
-    current_player == @player1 ? @player2 : @player1
+    current_player == @player_white ? @player_black : @player_white
   end
 
   def pick_color
